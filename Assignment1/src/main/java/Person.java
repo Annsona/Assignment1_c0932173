@@ -1,53 +1,33 @@
-
 import java.util.Optional;
 
 public class Person {
     private String name;
     private Integer age;
-    private Optional<Dog> dog;
+    private Optional<Dog> dog; // Dog is an Optional because the person may or may not own one
 
+    // Constructor to create a person without a dog
     public Person(String name, Integer age) {
         this(name, age, null);
     }
 
+    // Constructor to create a person with a dog
     public Person(String name, Integer age, Dog dog) {
         this.name = name;
         this.age = age;
-        this.dog = Optional.ofNullable(dog);
+        this.dog = Optional.ofNullable(dog); // Wrapping dog in Optional to handle null safely
     }
 
-    // Getters and Setters
-    public String getName() {
-        return name;
-    }
+    // Getters and setters for name, age, and dog
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Optional<Dog> getDog() {
-        return dog;
-    }
-
-    public void setDog(Dog dog) {
-        this.dog = Optional.ofNullable(dog);
-    }
-
-    // hasOldDog() method without if statement
+    // Checks if the person has an old dog (age >= 10)
     public boolean hasOldDog() {
+        // Uses Optional's map method to avoid null checks
         return dog.map(d -> d.getAge() >= 10).orElse(false);
     }
 
-    // changeDogsName() method without if statement
+    // Changes the dog's name if the person owns a dog
     public void changeDogsName(String newName) {
+        // Throws an exception if the person doesn't own a dog
         dog.map(d -> {
             d.setName(newName);
             return d;
@@ -56,12 +36,12 @@ public class Person {
 
     public static void main(String[] args) {
         try {
+            // Trying to change a dog's name when the person does not own one
             Person personWithoutDog = new Person("John", 25);
             personWithoutDog.changeDogsName("Buddy");
         } catch (RuntimeException e) {
+            // Handles the exception if no dog is owned
             System.out.println("Unable to change dog's name: " + e.getMessage());
         }
     }
 }
-
-

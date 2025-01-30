@@ -4,29 +4,15 @@ public class Dog {
     private String name;
     private Integer age;
 
+    // Constructor to create a Dog object
     public Dog(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
 
-    // Getters and Setters
-    public String getName() {
-        return name;
-    }
+    // Getters and setters for name and age
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    // Equals and hashCode for object comparison
+    // Equals and hashCode for comparing Dog objects
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
